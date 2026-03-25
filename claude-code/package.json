@@ -1,0 +1,22 @@
+{
+  "name": "skillport",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "skillport": "bin/skillport.ts"
+  },
+  "scripts": {
+    "port": "tsx bin/skillport.ts"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "yaml": "^2.7.1",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.4",
+    "@types/node": "^22.15.3"
+  }
+}

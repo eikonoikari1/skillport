@@ -1,0 +1,16 @@
+node_modules/
+.DS_Store
+*.log
+.env
+.env.*
+
+# Editor
+.vscode/
+.idea/
+
+# Build artifacts
+dist/
+out/
+
+# OS
+Thumbs.db
