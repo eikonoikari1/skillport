@@ -72,16 +72,21 @@ function sanitizeMdcYaml(yaml: string): string {
     /^(\s*(?:globs|applyTo)\s*:\s*)(.+)$/gm,
     (_, prefix: string, value: string) => {
       const trimVal = value.trim();
-      if (trimVal.startsWith('[') || trimVal.startsWith('"') || trimVal.startsWith("'")) {
+      // Already a proper YAML array
+      if (trimVal.startsWith('[')) {
         return `${prefix}${value}`;
       }
-      // Wrap comma-separated glob values in quotes
+      // Comma-separated values (quoted or unquoted) — wrap in array brackets
       const parts = trimVal.split(',').map((p: string) => {
         const t = p.trim();
         if (t.startsWith('"') || t.startsWith("'")) return t;
         return `"${t}"`;
       });
-      return `${prefix}[${parts.join(', ')}]`;
+      if (parts.length > 1 || !trimVal.startsWith('"')) {
+        return `${prefix}[${parts.join(', ')}]`;
+      }
+      // Single quoted value — wrap in array
+      return `${prefix}[${trimVal}]`;
     }
   );
 }

@@ -12,11 +12,11 @@ export function buildParity(features: FeatureParity[], ir: { name: string }): Pa
   if (level === 'full') {
     verdict = `The ported skill "${ir.name}" works identically in the target harness.`;
   } else if (level === 'high') {
-    verdict = `The ported skill will work well for its core purpose.${shimmed.length ? ` ${shimmed.map((s) => s.feature).join(', ')} have functional approximations.` : ''}`;
+    verdict = `The ported skill "${ir.name}" will work well for its core purpose.${shimmed.length ? ` ${shimmed.map((s) => s.feature).join(', ')} have functional approximations.` : ''}`;
   } else if (level === 'partial') {
-    verdict = `Core behavior is preserved but key features are approximated.${dropped.length ? ` ${dropped.map((d) => d.feature).join(', ')} have no equivalent and were annotated.` : ''}`;
+    verdict = `Core behavior of "${ir.name}" is preserved but key features are approximated.${dropped.length ? ` ${dropped.map((d) => d.feature).join(', ')} have no equivalent and were annotated.` : ''}`;
   } else {
-    verdict = `Significant functionality gaps. Manual adaptation recommended. ${dropped.map((d) => d.feature).join(', ')} are not available.`;
+    verdict = `"${ir.name}" has significant functionality gaps. Manual adaptation recommended. ${dropped.map((d) => d.feature).join(', ')} are not available.`;
   }
 
   return { score, level, features, verdict };
